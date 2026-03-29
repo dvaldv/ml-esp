@@ -24,6 +24,17 @@ jobs:
           echo "y" | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager "ndk;22.0.7026061"
           echo "NDK_HOME=$ANDROID_SDK_ROOT/ndk/22.0.7026061" >> $GITHUB_ENV
 
+      - name: Set Gradle version
+        run: |
+          mkdir -p gradle/wrapper
+          cat > gradle/wrapper/gradle-wrapper.properties << EOF
+          distributionBase=GRADLE_USER_HOME
+          distributionPath=wrapper/dists
+          distributionUrl=https\://services.gradle.org/distributions/gradle-7.3.3-bin.zip
+          zipStoreBase=GRADLE_USER_HOME
+          zipStorePath=wrapper/dists
+          EOF
+
       - name: Make gradlew executable
         run: chmod +x gradlew
 
